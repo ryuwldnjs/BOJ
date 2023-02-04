@@ -5,6 +5,7 @@
 #define INF 1000000000
 using namespace std;
 using pii = pair<int,int>;
+/*
 struct stats{
 	int cost;
 	int des;
@@ -15,10 +16,11 @@ struct cmp{
 	bool operator() (const stats &a, const stats &b){
 		return a.cost > b.cost;
 	}
-};
+};*/
+
 stack<int> path;
 vector<vector<pii>> v;
-priority_queue<stats, vector<stats>, cmp> pq;
+priority_queue<pii, vector<pii>, greater<pii>> pq;
 int dist[1005];
 int pre[1005];
 
@@ -27,25 +29,25 @@ void dijkstra(int start){
 	for(int i=0;i<1005;i++) dist[i] = INF;
 	
 	dist[start] = 0;
-	pq.push({dist[start], start, 0});
+	pq.push({dist[start], start});
 //	pre[start] = -1;
 	while(!pq.empty()){
-		int d = pq.top().cost;
-		int now = pq.top().des;
-		int front = pq.top().pre;
+		int d = pq.top().first;
+		int now = pq.top().second;
+	//	int front = pq.top().pre;
 	//	printf("%d\n", now);
 		pq.pop();
 		
 		if(dist[now] < d) continue;
-		pre[now] = front;
+		//pre[now] = front;
 		for(int i=0;i<v[now].size(); i++){
 			int next = v[now][i].first;
 			int next_d =  v[now][i].second + d;
 			
 			if(next_d < dist[next]){
 				dist[next] = next_d;
-				pq.push({next_d, next, now});
-				//pre[next] = now; //경로 기록 
+				pq.push({next_d, next});
+				pre[next] = now; //경로 기록 
 			}
 		}
 		
