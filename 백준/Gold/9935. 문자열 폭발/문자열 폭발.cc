@@ -18,20 +18,20 @@ int main(){
 	int str_sz = str.size();
 	int ex_sz = explosion.size();
 	
-	for(int i=0;i<ex_sz;i++){
+	for(int i=0;i<explosion.size();i++){
 		idx[explosion[i]]=i;
 	}
 	
-	for(int i=0;i<str_sz;i++){
+	for(int i=0;i<str.size();i++){
 		if(idx[str[i]] != -1)
 			s.push(idx[str[i]]);
 		else s.push(-1);
 		s2.push(str[i]);
 		
 		
-		if(idx[str[i]] == ex_sz-1){//폭발문자열 마지막 글자 
+		if(idx[str[i]] == explosion.size()-1){//폭발문자열 마지막 글자 
 			stack<int> tmp,tmp2;
-			int sz = ex_sz - 1;
+			int sz = explosion.size() - 1;
 			while(sz > -1 && !s.empty()){
 				int top = s.top();
 				int top2 = s2.top();
