@@ -4,6 +4,8 @@ int psum[200000+5][30]; // psum[n][a] : 인덱스n까지의 a의 개수
 string str,c;
 int q,a,b;
 int main(){
+	cin.tie(NULL);
+	ios::sync_with_stdio(false);
 	cin>>str;
 	cin>>q;
 	for(int i=0;i<str.size();i++){
