@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(200000)
 input= sys.stdin.readline
 
 dist = []
@@ -8,10 +8,7 @@ def dfs(start,target):
     visited[start] = True
 
     if start == target :
-        MAX = 0
-        if len(dist) > 0:
-            MAX = max(dist)
-        print(sum(dist) - MAX)
+        print(sum(dist) - max(dist))
         return
 
     for next,cost in graph[start]:
