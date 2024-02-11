@@ -26,12 +26,12 @@ int solution(vector<vector<int> > maps){
             int xx = x + dx[i];
             int yy = y + dy[i];
             
-            if(pass(xx, yy, maps) && dist[xx][yy] == 0){
-                dist[xx][yy] = dist[x][y] + 1;
+            if(pass(xx, yy, maps) && maps[xx][yy] == 1){
+                maps[xx][yy] = maps[x][y] + 1;
                 q.push({xx,yy});
             }
         }
         
     }
-    return dist[n-1][m-1] ? dist[n-1][m-1] : -1;
+    return maps[n-1][m-1] != 1 ? maps[n-1][m-1] : -1;
 }
