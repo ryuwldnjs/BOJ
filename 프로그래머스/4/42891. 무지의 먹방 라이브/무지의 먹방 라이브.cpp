@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 using ll=long long;
+
 int solution(vector<int> food_times, ll k) {
     vector<int> sorted_time = food_times;
     sort(sorted_time.begin(), sorted_time.end());
@@ -9,7 +9,6 @@ int solution(vector<int> food_times, ll k) {
     ll turn = 0;
     ll total_time = 0;
     for(int i=0;i<sorted_time.size();i++){
-        // printf("%d %d, ", turn, total_time);
         ll remain = sorted_time.size() - i;
         ll cost = remain * (sorted_time[i] - turn);
         
@@ -25,7 +24,6 @@ int solution(vector<int> food_times, ll k) {
         
     }
     
-        // printf("%d %d, ", turn, total_time);
     for(int i=0;i<food_times.size();i++){
         if(food_times[i] > turn && total_time++ == k) return i+1;
     }
