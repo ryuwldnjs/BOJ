@@ -1,10 +1,10 @@
 # [level 2] 숫자의 표현 - 12924 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12924) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12924#qna) 
 
 ### 성능 요약
 
-메모리: 3.92 MB, 시간: 0.08 ms
+메모리: 3.81 MB, 시간: 0.27 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 02월 27일 17:09:17
+2024년 02월 27일 17:43:55
 
 ### 문제 설명
 
