@@ -24,7 +24,6 @@ int solution(vector<vector<int>> jobs) {
             idx++;
         }
         auto top = pq.top();
-        printf("[%d,%d] ",top.start, top.time);
         pq.pop();
         
         while(idx < jobs.size()){
@@ -36,8 +35,6 @@ int solution(vector<vector<int>> jobs) {
         }
         last += top.time;
         answer += last - top.start; //각 스케줄의 총 소요시간 합산
-        printf(", %d %d", last, answer);
     }
-    cout<<answer;
     return answer / jobs.size();
 }
