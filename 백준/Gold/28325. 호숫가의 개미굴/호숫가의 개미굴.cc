@@ -14,7 +14,10 @@ int main(){
 	
 	//마지막 방에는 안산다고 가정 
 	dp[0] = !arr[0];
-	dp[1] = arr[1] || dp[0] ? 0 : 1;
+	if(arr[1]){
+		dp[1] = dp[0];
+	}
+	else dp[1] = 1;
 	
 	for(int i=2;i<n-1;i++){
 		if(arr[i]) dp[i] = dp[i-1];
