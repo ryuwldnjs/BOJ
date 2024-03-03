@@ -1,16 +1,2 @@
-#include <iostream>
-#include <vector> 
-using namespace std;
-vector<int> answer;
-int n,x;
-int main(){
-	cin>>n;
-	for(int i=0;i<n;i++){
-		cin>>x;
-		auto target = lower_bound(answer.begin(), answer.end(), x);
-		if(target == answer.end()) answer.push_back(x);
-		else *target = x; 
-	}
-	cout<<answer.size();
-	return 0;
-}
+#include <bits/stdc++.h> 
+using namespace std;vector<int>a;int n,x;main(){cin>>n;while(n--){cin>>x;auto t=lower_bound(a.begin(),a.end(),x);if(t==a.end())a.push_back(x);else*t=x;}cout<<a.size();}
