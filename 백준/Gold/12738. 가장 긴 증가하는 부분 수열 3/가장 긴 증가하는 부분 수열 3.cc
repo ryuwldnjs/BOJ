@@ -1,24 +1,16 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
+#include <vector> 
 using namespace std;
-int n, a[1000000+50];
-vector<int> vec;
+vector<int> answer;
+int n,x;
 int main(){
 	cin>>n;
 	for(int i=0;i<n;i++){
-		cin>>a[i];
+		cin>>x;
+		auto target = lower_bound(answer.begin(), answer.end(), x);
+		if(target == answer.end()) answer.push_back(x);
+		else *target = x; 
 	}
-	
-	for(int i=0;i<n;i++){
-		int llo = lower_bound(vec.begin(), vec.end(), a[i]) - vec.begin();
-		if(llo == vec.size()){
-			vec.push_back(a[i]);
-		}
-		else{
-			vec[llo] = a[i];
-		}
-	}
-	cout<<vec.size();
+	cout<<answer.size();
 	return 0;
 }
