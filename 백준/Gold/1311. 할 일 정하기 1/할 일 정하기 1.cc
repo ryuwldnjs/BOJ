@@ -22,8 +22,8 @@ int main(){
                     bit += (1<<j) - 1;
                     continue;
                 }
-
-                dp[i][(1<<j)|bit] = min(dp[i][(1<<j)|bit], dp[i-1][bit] + work[i][j]);
+                if(dp[i][(1<<j)|bit] > dp[i-1][bit] + work[i][j]) dp[i][(1<<j)|bit] = dp[i-1][bit] + work[i][j];
+                // dp[i][(1<<j)|bit] = min(dp[i][(1<<j)|bit], dp[i-1][bit] + work[i][j]);
             }
         }
     }
