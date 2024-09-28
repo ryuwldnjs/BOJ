@@ -27,19 +27,14 @@ int main(){
             if(i - cost[j] >= 0) tmp = dp[i - cost[j]] + to_string(j);
             sort(tmp.begin(), tmp.end(), greater<char>());
             if(tmp.front()=='0') continue;
-            // if(dp[i].size() <= tmp.size() && tmp.size() && tmp.back() != '0'){
-            //     dp[i] = max(dp[i], tmp, cmp);
-            // }
-                dp[i] = max(dp[i], tmp, cmp);
+            dp[i] = max(dp[i], tmp, cmp);
 
         }
-        // cout<<i<<' '<<dp[i]<<'\n';
         sort(dp[i].begin(), dp[i].end(), greater<char>());
     }
     for(int i=1;i<=m;i++){
-        if(dp[i].size()==0) continue;
+        if(dp[i].empty()) continue;
         MAX = max(MAX, dp[i], cmp);
-        // cout<<i<<' '<<dp[i]<<'\n';
     }
     if(MAX == "") MAX = "0";
     cout<<MAX;
