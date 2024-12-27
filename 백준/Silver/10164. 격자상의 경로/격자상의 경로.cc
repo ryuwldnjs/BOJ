@@ -8,8 +8,8 @@ int main(){
 	cin>>n>>m>>k;
 	
 	int n1,m1,n2,m2;
-	n1 = k/m + 1;
-	m1 = k%m;
+	n1 = (k-1)/m + 1;
+	m1 = (k+m-1)%m + 1;
 	n2 = n - n1 + 1;
 	m2 = m - m1 + 1;
 	
