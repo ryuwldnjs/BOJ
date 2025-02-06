@@ -4,28 +4,25 @@
 using namespace std;
 struct Info{
     int b, c;
-    bool operator<(const Info& other)const{
-        return c > other.c;
-    }
 };
 int n,m,s,e;
 int ans;
 vector<int> dist, indegree;
 vector<vector<Info>> graph, reverse_graph;
+
 void topology(){
-    priority_queue<Info> pq;
-    pq.push({s,0});
-    dist[s] = 0;
-    while(!pq.empty()){
-        int now = pq.top().b;
-        int now_dist = pq.top().c;
-        pq.pop();
+    queue<Info> q;
+    q.push({s,0});
+    while(!q.empty()){
+        int now = q.front().b;
+        int now_dist = q.front().c;
+        q.pop();
         for(int i=0;i<graph[now].size();i++){
             int next = graph[now][i].b;
             int next_dist = now_dist + graph[now][i].c;
             dist[next] = max(dist[next], next_dist);
             if(--indegree[next] == 0){
-                pq.push({next, dist[next]});
+                q.push({next, dist[next]});
             }
 
         }
@@ -58,9 +55,6 @@ int main(){
     cin>>s>>e;
     topology();
     backtrack(e, dist[e]);
-    for(int i=1;i<=n;i++){
-        // printf("%d ", dist[i]);
-    }
     cout<<dist[e]<<'\n'<<ans;
     return 0;
 }
