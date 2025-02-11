@@ -14,6 +14,15 @@ public:
     Trie(){
         root = new Node();
     }
+    ~Trie(){
+        deleteTrie(root);
+    }
+    void deleteTrie(Node *node){
+        for(auto child: node->children){
+            deleteTrie(child.second);
+        }
+        delete node;
+    }
 
     void insert(string word){
         Node* node = root;
@@ -46,7 +55,7 @@ public:
 int main(){
     int t; cin>>t;
     while(t--){
-        Trie trie;
+        Trie trie = Trie();
         bool isAnswer = true;
         int n; cin>>n;
         for(int i=0;i<n;i++){
