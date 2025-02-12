@@ -1,56 +1,66 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
-typedef long long ll;
 using namespace std;
+using ll=long long;
+struct SegmentTree {
+    int size; //n이상의 가장 작은 2^k
+    vector<ll> tree;
 
-vector<ll> rangeSum, array;
-//세그먼트 트리 -구간합 구하기 
+    SegmentTree(int n) {
+        size = (1<<(32 - __builtin_clz(n)));
+        tree.resize(2 * size);
+    }
 
-ll init(int L, int R, int node){
-	if(L==R)
-		return rangeSum[node] = array[L];
-	int mid = (L+R)/2;
-	ll leftMin = init(L, mid, node*2);
-	ll rightMin = init(mid+1, R, node*2+1);
-	return rangeSum[node] = leftMin + rightMin;
-} 
+    void build(vector<ll>& arr) {
+        for (int i = 0; i < arr.size(); i++)
+            tree[size + i] = arr[i];
 
-//질의2 - 구간합 구하기 
-ll query(int L, int R, int node, int node_L, int node_R){//구간합 구하기 
-	if(R<node_L || node_R<L) return 0;
-	if(L<=node_L && node_R<=R) return rangeSum[node];
-	
-	int mid = (node_L+node_R)/2;
-	return query(L,R,node*2,node_L,mid) + query(L,R,node*2+1,mid+1,node_R);
-}
+        for (int i = size - 1; i > 0; i--)
+            tree[i] = tree[2 * i] + tree[2 * i + 1];
+    }
 
-//질의1 - 값 개신하기 
-ll update(int idx, ll newValue, int node, int node_L, int node_R){
-	if(idx < node_L || node_R < idx)
-		return rangeSum[node]; //상관없는 구간은 무시 
-	if(node_L == node_R) return rangeSum[node] = newValue;
-	
-	int mid = (node_L+node_R)/2;
-	return rangeSum[node] = update(idx, newValue, node*2, node_L, mid) + update(idx, newValue, node*2+1, mid+1, node_R);	
-}
+    void update(int index, ll value) {
+        index += size;  // 리프 노드로 이동
+        tree[index] = value;  // 값 변경
+
+        while (index > 1) {
+            index /= 2;
+            tree[index] = tree[2 * index] + tree[2 * index + 1];
+        }
+    }
+
+    ll query(int left, int right) {
+        ll sum = 0;
+        left += size;
+        right += size;
+
+        while (left <= right) {
+            if (left % 2 == 1) sum += tree[left++];
+            if (right % 2 == 0) sum += tree[right--];
+            left /= 2, right /= 2;
+        }
+        return sum;
+    }
+};
+
 
 int main(){
-	cin.tie(NULL);
-	ios::sync_with_stdio(false);
-	
-	int n,m,k;
-	ll a,b,c;//각 질의 
-	cin>>n>>m>>k;
-	array.resize(n+2);
-	rangeSum.resize(4*n);
-	for(int i=0;i<n;i++) cin>>array[i];
-	init(0, n-1, 1);//arr전체범위를 포함하는 1번node 출동 
-	
-	for(int i=0;i<m+k;i++){ //질의 
-		cin>>a>>b>>c;
-		if(a==1) update(b-1, c, 1, 0, n-1);//갱신 
-		else cout<<query(b-1, c-1, 1, 0, n-1)<<'\n';//구간합 출력 
-	}
-	return 0;
+    int n,m,k; cin>>n>>m>>k;
+    SegmentTree segTree(n);
+    vector<ll> arr(n);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    segTree.build(arr);
+
+    for(int i=0;i<m+k;i++){
+        ll a,b,c; cin>>a>>b>>c;
+        if(a == 1){
+            segTree.update(b-1, c);
+        }
+        else{
+            cout<<segTree.query(b-1,c-1)<<'\n';
+        }
+    }
+    return 0;
 }
