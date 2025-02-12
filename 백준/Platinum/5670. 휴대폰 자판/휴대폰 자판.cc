@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <map>
 using namespace std;
 struct Node{
-    unordered_map<char, Node*> children;
+    map<char, Node*> children;
     bool isEndOfWord;
 };
 struct Trie{
@@ -11,7 +11,15 @@ struct Trie{
     Trie(){
         root = new Node();
     }
-
+    ~Trie(){
+        deleteTrie(root);
+    }
+    void deleteTrie(Node *node){
+        for(auto child: node->children){
+            deleteTrie(child.second);
+        }
+        delete node;
+    }
     void insert(string& word){
         Node* node = root;
         for(char ch: word){
