@@ -12,7 +12,7 @@ struct Trie{
         root = new Node();
     }
     ~Trie(){
-        deleteTrie(root);
+        //deleteTrie(root);
     }
     void deleteTrie(Node *node){
         for(auto child: node->children){
