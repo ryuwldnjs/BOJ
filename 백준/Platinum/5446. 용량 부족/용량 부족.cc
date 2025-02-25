@@ -13,7 +13,15 @@ struct Trie{
     Trie(){
         root = new Node();
     }
-
+    ~Trie(){
+        deleteNode(root);
+    }
+    void deleteNode(Node* node){
+        for(auto it=node->children.begin(); it!=node->children.end();it++){
+            deleteNode(it->second);
+        }
+        delete node;
+    }
     void insert(string word){
         Node* node = root;
         for(char ch: word){
@@ -34,11 +42,10 @@ struct Trie{
         node->isBanned = true;
         node->isEndOfWord = true;
     }
+
     int calculate(int remain){
         Node* node = root;
-        int answer = traverse(node, remain);
-        answer += remain;
-        return answer;
+        return traverse(node, remain) + remain;
     }
 
     int traverse(Node* node, int& remain){
@@ -54,6 +61,7 @@ struct Trie{
         return cnt;
     }
 };
+
 void solve(){
     Trie trie;
     int n,m;
@@ -69,7 +77,9 @@ void solve(){
     }
     cout<<trie.calculate(n)<<'\n';
 }
+
 int main(){
+    cin.tie(0); ios::sync_with_stdio(0);
     int t; cin>>t; while(t--) solve();
     return 0;
 }
