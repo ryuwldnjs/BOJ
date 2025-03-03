@@ -16,31 +16,31 @@ int gcd(int a, int b){
 }
 
 //k-th찾기 퀵정렬 기반
-int partition(vector<Fraction>& arr, int left, int right){
-    int idx = left + rand()%(right-left+1);
-    swap(arr[idx], arr[right]);
-    Fraction pivot = arr[right];
-    for(int i=left;i<right;i++){
-        if(arr[i] < pivot){
-            swap(arr[left], arr[i]);
-            left++;
-        }
-    }
-    swap(arr[left], arr[right]);
-    return left;
-}
-Fraction quickSort(vector<Fraction>& arr, int left, int right, int k){
-    if(left < right){
-        int pivot = partition(arr, left, right);
-        if(pivot == k) return arr[pivot];
-        else if(pivot < k) return quickSort(arr, pivot+1, right, k);
-        else return quickSort(arr, left, pivot-1, k);
-    }
-    return arr[left];
-}
-Fraction findKth(vector<Fraction>& arr, int k){
-    return quickSort(arr, 0, arr.size()-1, k);
-}
+// int partition(vector<Fraction>& arr, int left, int right){
+//     int idx = left + rand()%(right-left+1);
+//     swap(arr[idx], arr[right]);
+//     Fraction pivot = arr[right];
+//     for(int i=left;i<right;i++){
+//         if(arr[i] < pivot){
+//             swap(arr[left], arr[i]);
+//             left++;
+//         }
+//     }
+//     swap(arr[left], arr[right]);
+//     return left;
+// }
+// Fraction quickSort(vector<Fraction>& arr, int left, int right, int k){
+//     if(left < right){
+//         int pivot = partition(arr, left, right);
+//         if(pivot == k) return arr[pivot];
+//         else if(pivot < k) return quickSort(arr, pivot+1, right, k);
+//         else return quickSort(arr, left, pivot-1, k);
+//     }
+//     return arr[left];
+// }
+// Fraction findKth(vector<Fraction>& arr, int k){
+//     return quickSort(arr, 0, arr.size()-1, k);
+// }
 
 
 vector<Fraction> arr={{0,1}};
@@ -64,7 +64,10 @@ int main(){
         isReversed = true;
     }
 
-    Fraction answer = findKth(arr, k-1);
+
+    //n번째 수 찾는 라이브러리 ㅋㅋ
+    nth_element(arr.begin(), arr.begin()+k-1, arr.end());
+    Fraction answer = arr[k-1];
     if(isReversed) cout<<answer.down - answer.up<<" "<<answer.down;
     else cout<<answer.up<<" "<<answer.down;
     return 0;
