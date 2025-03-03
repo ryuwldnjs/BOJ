@@ -15,6 +15,7 @@ int gcd(int a, int b){
     return gcd(b, a%b);
 }
 
+//k-th찾기 퀵정렬 기반
 int partition(vector<Fraction>& arr, int left, int right){
     int idx = left + rand()%(right-left+1);
     swap(arr[idx], arr[right]);
@@ -41,22 +42,22 @@ Fraction findKth(vector<Fraction>& arr, int k){
     return quickSort(arr, 0, arr.size()-1, k);
 }
 
-vector<Fraction> arr;
+
+vector<Fraction> arr={{0,1}};
 int main(){
     cin.tie(0); cout.tie(0); ios::sync_with_stdio(0);
-    arr.push_back({0,1});
-    // arr.push_back({1,1});
-
     int n,k;
     cin>>n>>k;
-    if(n>=2) arr.push_back({1,2});    
-    for(int i=3;i<=n;i++){
+    //Reafy수열은 유사 좌우대칭이므로, 절반만 구하기
+    for(int i=2;i<=n;i++){
         for(int j=1;j<=i/2;j++){
             if(gcd(i,j)==1){
                 arr.push_back({j,i});
             }
         }
     }
+
+    //절반만 구하고 상수커팅...
     bool isReversed = false;
     if(k>arr.size()){
         k = 2*arr.size() - k;
@@ -66,12 +67,5 @@ int main(){
     Fraction answer = findKth(arr, k-1);
     if(isReversed) cout<<answer.down - answer.up<<" "<<answer.down;
     else cout<<answer.up<<" "<<answer.down;
-    // sort(arr.begin(), arr.end());
-    // cout<<arr.size()<<endl;
-    // for(int i=0;i<arr.size();i++){
-    //     cout<<arr[i].up<<"/"<<arr[i].down<<endl;
-    // }
-
-
     return 0;
 }
