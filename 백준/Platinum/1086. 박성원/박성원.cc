@@ -32,11 +32,9 @@ ll getRemainder(string num){
 //bit조합으로 구성된 나머지가 now
 ll solve(ll bit, ll now){
     if(bit == (1<<n)-1){
-        // printf("%d\n", now);
         if(now%k == 0) return 1;
         return 0;
     }
-    // printf("%d\n", now);
     ll &ret = dp[bit][now];
     if(ret != -1) return ret;
 
@@ -45,8 +43,9 @@ ll solve(ll bit, ll now){
     for(ll i=0;i<n;i++){
         if(bit & (1<<i)) continue;
         ll next_bit = bit | (1<<i);
-        ll next = ((now * cache[arr[i].size()]) % k + nums[i]) % k;
-        // getRemainder(to_string(now) + to_string(nums[i]));
+        ll next = ((now * cache[arr[i].size()]) + nums[i]) % k;
+        // ll next = getRemainder(to_string(now) + to_string(nums[i]));
+        // 위처럼 하면 예제4에서 틀림
         ret += solve(next_bit, next);
     }
 
@@ -65,11 +64,9 @@ int main(){
     
     for(ll i=0;i<n;i++){
         nums.push_back(getRemainder(arr[i]));
-        // printf("%d ", nums[i]);
     }
     ll cnt = solve(0, 0);
     ll total = factorial(n);
-    // cout<<cnt<<' '<<total<<'\n';
     cout<<cnt / gcd(cnt,total) <<'/' << total / gcd(cnt,total);
     return 0;
 }
