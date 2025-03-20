@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 using namespace std;
-// int dp[2500+5][2500+5];
 vector<vector<int>> dp(2550, vector<int>(2550, -1));
 int solution(string s){
     int answer = 0;
