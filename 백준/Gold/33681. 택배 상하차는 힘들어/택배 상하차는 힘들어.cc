@@ -22,22 +22,25 @@ ll dfs(ll now){
         MAX = max(MAX, total_cost[next]);
         total_cost[now] += total_cost[next];
     }
-    if(now != 1) ret += 2LL*(total_cost[now] - MAX);
+
     //1번노드는 재상하차 과정없이 바로 싣으면 됨
+    if(now == 1) ret += total_cost[now];
+    else ret += 2LL*(total_cost[now] - MAX);
+    
     
     ret += cost[now];
     total_cost[now] += cost[now];
-    // printf("%d %d %d\n", now, ret, total_cost[now]);
     return ret;
 }
 
-ll answer = 0;
 int main(){
+    cin.tie(0) -> sync_with_stdio(0);
     ll n; cin>>n;
     graph.resize(n+1);
     visited.resize(n+1);
     cost.resize(n+1);
     total_cost.resize(n+1);
+
     for(ll i=1;i<=n;i++){
         cin>>cost[i]; 
     }
@@ -49,8 +52,6 @@ int main(){
         graph[b].push_back(a);
     }
     
-    answer = dfs(1);
-    answer += total_cost[1];
-    cout<<answer;
+    cout<<dfs(1);
     return 0;
 }
