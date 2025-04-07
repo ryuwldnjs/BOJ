@@ -18,9 +18,9 @@ int main(){
         cout<<0;
         return 0;
     }
-    ll frequency = k / target;
+    ll frequency = k/target;
 
-    ll answer  = (d - 1) / frequency;
+    ll answer  = (d-1) / frequency;
     cout<<answer;
     return 0;
 }
