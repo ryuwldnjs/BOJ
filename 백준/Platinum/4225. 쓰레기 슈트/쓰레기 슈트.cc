@@ -101,8 +101,8 @@ void solve(int tc){
 
     double answer = convex_hull();
 
-    // answer = ceil(answer * 100.0) / 100.0;
-    answer += 0.005;
+    answer = ceil(answer * 100.0) / 100.0;
+    // answer += 0.005;
     cout.precision(2);
     cout<< fixed << "Case "<<tc<<": "<<answer<<'\n';
 }   
