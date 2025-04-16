@@ -3,9 +3,8 @@
 using namespace std;
 using pii=pair<int,int>;
 const int n = 10;
-const int INF = 20;
+const int INF = 25;
 int map[n][n];
-
 
 bool isOnes(int y, int x, int size){
     if(y+size > n || x+size > n) return false;
@@ -16,16 +15,6 @@ bool isOnes(int y, int x, int size){
     }
     return true;
 }
-// pii OnesPosition(int size, int y, int x){
-//     for(int i=y;i<n;i++){
-//         int start_x = x;
-//         if(i!=y) start_x = 0;
-//         for(int j=start_x;j<n;j++){
-//             if(isOnes(i,j,size)) return {i,j};
-//         }
-//     }
-//     return {-1,-1};
-// }
 
 void setValue(int y, int x, int size, int value){
     for(int i=y;i<y+size;i++){
@@ -40,9 +29,8 @@ int ones;
 vector<int> remain(6, 5);
 
 void solve(int used, int start_y, int start_x){
-    // printf("%d %d %d\n", start_y, start_x, used);
     if(used >= answer) return;
-    if(ones == 0){
+    if(ones == 0){ // 모든 1을 덮었을때
         answer = min(answer, used);
         return;
     }
@@ -67,7 +55,7 @@ void solve(int used, int start_y, int start_x){
                 setValue(y, x, i, 1);
                 remain[i]++; ones += i*i;
             }
-            //현재 map[y][x]=1라면, 처리 못하고 넘어가는 경우는 없음
+            //현재 map[y][x]=1이면서, 처리 못하고 그냥 넘어가는 경우는 없음
             return;
         }
     }
