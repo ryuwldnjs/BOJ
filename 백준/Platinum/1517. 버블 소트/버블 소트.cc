@@ -34,18 +34,15 @@ struct SegTree{
 };
 
 void compress(vector<int> &arr){
-    unordered_map<int, int> m;
     vector<int> tmp = arr;
     sort(tmp.begin(), tmp.end());
-    int val = 0;
-    for(int i=0;i<tmp.size();i++){
-        if(!m.count(tmp[i])) m[tmp[i]] = val++;
-    }
+    tmp.erase(unique(tmp.begin(), tmp.end()), tmp.end());
 
-    for(int i=0;i<arr.size();i++){
-        arr[i] = m[arr[i]];
+    for(int &x: arr){
+        x = lower_bound(tmp.begin(), tmp.end(), x) - tmp.begin();
     }
 }
+
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
     int n;cin>>n;
