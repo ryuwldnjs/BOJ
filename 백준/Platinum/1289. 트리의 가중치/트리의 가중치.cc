@@ -5,7 +5,7 @@ using pii=pair<int,int>;
 using pll=pair<ll,ll>;
 const ll MOD = 1'000'000'007;
 const ll MOD2 = MOD * 2;
-const ll INV2 = 500000004;  // 2의 역원 (mod 1e9+7)
+
 struct Info{
     ll b,cost;
 };
@@ -19,7 +19,7 @@ ll dfs1(int now){
     for(auto [next, next_dist]: graph[now]){
         if(visited[next]) continue;
         
-        subtree[now] += (next_dist%MOD) * (dfs1(next) + 1);
+        subtree[now] += next_dist * (dfs1(next) + 1);
         subtree[now] %= MOD;
     }
     return subtree[now];
@@ -31,7 +31,7 @@ void dfs2(int now, ll sum){
     // printf("%d %lld, %d\n", now, sum, subtree[now]);
     for(auto [next, next_dist]: graph[now]){
         if(visited[next]) continue;
-        ll next_sum = sum - (next_dist%MOD) * (1+subtree[next]) + 1;
+        ll next_sum = sum - next_dist * (1+subtree[next]) + 1;
         next_sum = (next_sum + MOD) % MOD;
         next_sum *= next_dist;
         next_sum = (next_sum + MOD) % MOD;
@@ -55,7 +55,7 @@ int main(){
     visited = vector<bool>(n+1);
     dfs2(1, subtree[1]);
 
-    answer = answer * INV2 % MOD;
+    answer = answer * 500000004 % MOD;
 
     cout<<answer;
     return 0;
