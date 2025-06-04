@@ -47,19 +47,15 @@ int main(){
         }
     }
 
-    for(int MIN=0;MIN<200;MIN++){
-        int l=MIN, r=400;
-        for(int i=0;i<10;i++){
-            int mid = (l+r)/2;
-            memset(visited, 0, sizeof(visited));
-            if(dfs(0,0,MIN, mid)) r = mid;
-            else l = mid;
+    int l=0,r=0;
+    while(r <= 200){
+        memset(visited, 0, sizeof(visited));
+        if(dfs(0,0,l,r)){ 
+            answer = min(answer, r-l);
+            l++;
         }
-        if(dfs(0,0,MIN,l)) answer = min(answer, l-MIN);
-        else answer = min(answer, r-MIN);
-        // printf("%d %d %d\n", MIN, l, r);
+        else r++;
     }
-    // cout(dfs(0,0,0))
     cout<<answer;
     return 0;
 }
