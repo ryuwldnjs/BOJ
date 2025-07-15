@@ -12,6 +12,7 @@ int n,m;
 bool pass(int y, int x){
     return 0<=y&&y<n && 0<=x&&x<m;
 }
+
 bool canExit(int y, int x){
     for(int dir: directions){
         int yy = y + dy[dir];
@@ -33,7 +34,6 @@ bool canAllExit(){
         for(int j=0;j<n;j++){
             if(board[i][j] != '.') continue;
             if(!canExit(i,j)) isAnswer = false;
-
         }
     }
     return isAnswer;
@@ -50,7 +50,7 @@ void dfs(int idx, int dir){
         return;
     }
     for(int i=0;i<4;i++){
-        if(dir == i) continue;
+        if(dir == i || dir>=0 && abs(dir-i)==2) continue;
         directions.push_back(i);
         dfs(idx + 1, i);
         directions.pop_back();
