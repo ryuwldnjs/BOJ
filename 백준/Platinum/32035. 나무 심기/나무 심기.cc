@@ -5,7 +5,7 @@ using pii=pair<int,int>;
 using pll=pair<ll,ll>;
 const int SIZE = 200;
 
-vector<vector<char>> answer(SIZE, vector<char>(SIZE, '.'));
+vector<vector<char>> answer(4, vector<char>(SIZE, '.'));
 int main(){
     cin.tie(0) -> sync_with_stdio(0);
     int a,b;cin>>a>>b;
@@ -82,8 +82,8 @@ int main(){
     }
 
 
-    cout<<"YES\n"<<SIZE<<' '<<SIZE<<'\n';
-    for(int i=0;i<SIZE;i++){
+    cout<<"YES\n"<<4<<' '<<SIZE<<'\n';
+    for(int i=0;i<4;i++){
         for(int j=0;j<SIZE;j++){
             cout<<answer[i][j];
         }
