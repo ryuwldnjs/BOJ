@@ -40,11 +40,10 @@ int main(){
 
         ll x = a[i];
         int idx = lower_bound(f.begin(), f.end(), x) - f.begin();
-        if(idx>0) idx--;
-        // if(idx < f.size()) x = f[idx].start;
+        // if(idx>0) 
+        idx--;
 
         dp[i] = f[idx].a * x + f[idx].b;
-        // printf("%d:%lld\n",i,idx);
     }
     cout<<dp[n-1];
     return 0;
