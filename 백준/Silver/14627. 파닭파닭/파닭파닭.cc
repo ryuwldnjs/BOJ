@@ -21,11 +21,12 @@ int main(){
         cin>>pa[i];
     }
 
-    ll l=0, r=2e9;
-    for(int i=0;i<100;i++){
+    ll l=1, r=2e9;
+    int it = log2(r) + 1;
+    for(int i=0;i<it;i++){
         ll mid = (l+r)/2;
         if(able(mid)) l = mid;
-        else r = mid;
+        else r = mid-1;
     }
 
     ll total = accumulate(pa.begin(), pa.end(), 0LL);
