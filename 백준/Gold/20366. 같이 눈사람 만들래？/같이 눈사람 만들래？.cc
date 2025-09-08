@@ -35,7 +35,7 @@ void solve(){
     ll answer = INF;
     for(int i=1;i<arr.size();i++){
 
-        for(int j=i-1;j>=0 && j>= i-10 ;j--){
+        for(int j=i-1;j>=0 && j>= i-2 ;j--){
             ll gap = abs(arr[j].val - arr[i].val);
             set<ll> s = {arr[j].l, arr[j].r, arr[i].l, arr[i].r};
 
