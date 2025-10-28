@@ -3,17 +3,16 @@ using namespace std;
 using ll=long long;
 using pii=pair<int,int>;
 using pll=pair<ll,ll>;
-
 struct SegTree{
-
+    
     vector<ll> tree, lazy;
     int size, height;
 
     void build(vector<ll> &arr){
         int n = arr.size();
-        size = 1<<(32 - __builtin_clz(n));
         height = 32 - __builtin_clz(n);
-        // height = log2(size);
+        size = 1<<height;
+
         tree = vector<ll>(size*2);
         lazy = vector<ll>(size*2);
 
@@ -41,15 +40,13 @@ struct SegTree{
                 lazy[i] = 0;
             }
         }
+
     }
 
     void pull(int idx){
         while(idx > 1){
             idx/=2;
             tree[idx] = tree[idx*2] + tree[idx*2+1];
-            int h = log2(idx);
-            if(idx < size) tree[idx] += lazy[idx] * ((size >> h)+1);
-
         }
     }
 
