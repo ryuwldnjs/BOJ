@@ -38,7 +38,7 @@ int main(){
             p[i][j] = x / 100.0;
         }
     }
-    fill(&dp[0], &dp[(1<<20)], -1.0);
+    fill(&dp[0], &dp[(1<<20)], -1);
     cout<<setprecision(6)<<fixed;
     cout<<solve((1<<n) - 1) * 100;
     return 0;
