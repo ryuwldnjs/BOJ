@@ -3,7 +3,7 @@ using namespace std;
 using ll=long long;
 using pii=pair<ll,ll>;
 using pll=pair<ll,ll>;
-const ll INF = 1e18;
+const ll INF = 1e17;
 
 ll n, L;
 vector<ll> pos;
@@ -22,14 +22,11 @@ ll solve(ll l, ll r, ll last){
     if(ret != -1) return ret;
     ret = INF;
     ll remain = n - (r-l);
-    if(last == 0){
-        ret = min(ret, solve(l+1, r, 0) + (pos[l+1]-pos[l]) * remain);
-        ret = min(ret, solve(l+1, r, 1) + (pos[r] - pos[l]) * remain);
-    }
-    else{
-        ret = min(ret, solve(l, r-1, 1) + (pos[r] - pos[r-1]) * remain);
-        ret = min(ret, solve(l, r-1, 0) + (pos[r] - pos[l]) * remain);
-    }
+    if(last == 0)
+        ret = min(solve(l+1, r, 0) + (pos[l+1]-pos[l]) * remain, solve(l+1, r, 1) + (pos[r] - pos[l])*remain);
+
+    else
+        ret = min(solve(l, r-1, 1) + (pos[r] - pos[r-1]) * remain, solve(l, r-1, 0) + (pos[r] - pos[l])*remain);
     
     return ret;
 }
