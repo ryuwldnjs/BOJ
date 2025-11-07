@@ -19,8 +19,8 @@ ll solve(ll l, ll r, ll last){
     if(l > r) return INF;
     
     ll &ret = dp[l][r][last];
-    if(ret != -1) return ret;
-    ret = INF;
+    if(ret != INF) return ret;
+
     ll remain = n - (r-l);
     if(last == 0)
         ret = min(solve(l+1, r, 0) + (pos[l+1]-pos[l]) * remain, solve(l+1, r, 1) + (pos[r] - pos[l])*remain);
@@ -39,7 +39,7 @@ int main(){
     for(ll i=0;i<n;i++) cin>>pos[i];
     sort(pos.begin(), pos.end());
    
-    fill(&dp[0][0][0], &dp[1004][1004][1], -1);
+    fill(&dp[0][0][0], &dp[1004][1004][1], INF);
 
     ll idx = lower_bound(pos.begin(), pos.end(), L) - pos.begin();
     
