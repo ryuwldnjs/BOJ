@@ -19,8 +19,8 @@ int main(){
     int n;cin>>n;
     for(int i=0;i<n;i++){
         int a,x1,x2;cin>>a>>x1>>x2;
-        if(seen.count({x1, x2})) continue; //완전히 겹침
-        seen.insert({x1, x2});
+        // if(seen.count({x1, x2})) continue; //완전히 겹침
+        // seen.insert({x1, x2});
 
         pos.push_back({x1, x2});
     }
