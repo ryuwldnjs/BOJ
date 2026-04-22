@@ -14,33 +14,58 @@ vector<vector<Info>> graph;
 vector<int> dist;
 int n,p,k;
 
-void dijkstra(int val){
+// void dijkstra(int val){
+//     dist = vector<int>(n+1, 1e9);
+//     priority_queue<Info> pq;
+//     dist[1] = 0;
+//     pq.push({1, 0});
+
+//     while(!pq.empty()){
+//         int now = pq.top().to;
+//         int now_distance = pq.top().cost;
+//         pq.pop();
+
+//         if(now_distance > dist[now]) continue;
+
+//         for(int i=0;i<graph[now].size();i++){
+//             int next = graph[now][i].to;
+//             int next_distance = now_distance + (graph[now][i].cost > val); // 임계치보다 크면, 가중치 부여
+
+//             if(next_distance >= dist[next]) continue;
+//             dist[next] = next_distance;
+//             pq.push({next, next_distance});
+//         }
+//     }
+//     return;
+// }
+
+void bfs(int val){
+    queue<Info> q;
+    // vector<bool> visited(n+1);
     dist = vector<int>(n+1, 1e9);
-    priority_queue<Info> pq;
     dist[1] = 0;
-    pq.push({1, 0});
+    // visited[1] = true;
+    q.push({1,0});
 
-    while(!pq.empty()){
-        int now = pq.top().to;
-        int now_distance = pq.top().cost;
-        pq.pop();
+    while(!q.empty()){
+        int now = q.front().to;
+        int now_distance = q.front().cost;
+        q.pop();
 
-        if(now_distance > dist[now]) continue;
-
-        for(int i=0;i<graph[now].size();i++){
+        for(int i=0;i<graph[now].size(); i++){
             int next = graph[now][i].to;
-            int next_distance = now_distance + (graph[now][i].cost > val); // 임계치보다 크면, 가중치 부여
+            int next_distance = now_distance + (graph[now][i].cost > val);
 
-            if(next_distance >= dist[next]) continue;
+            if(dist[next] <= next_distance) continue;
+            // visited[next] = true;
             dist[next] = next_distance;
-            pq.push({next, next_distance});
+            q.push({next, next_distance});
         }
     }
-    return;
 }
-
 bool able(int val){
-    dijkstra(val);
+    // dijkstra(val);
+    bfs(val);
     // printf("%d\n", dist[n]);
     return dist[n] <= k;
 }
